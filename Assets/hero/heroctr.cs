@@ -61,13 +61,20 @@ public class heroctr : MonoBehaviour
     private bool isskill;
 
     private bool skill;//是否产生了剑气
-    private void Awake()
+
+    public int goldnum;
+
+    public Text goldnumtext;//这里需要读取文件来获取上个场景留下的金币数
+
+    public bool crawlable;
+
+    public bool iscraw;
+
+    public int crawdir;//1向上，-1向下
+    void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
-    }
-    void Start()
-    {
         speed = 10f;
         isjump = false;
         jumptimer = 0;
@@ -90,6 +97,7 @@ public class heroctr : MonoBehaviour
         isskill = false;
         maxskilltimer = 20;
         skill = false;
+        crawlable = false;
     }
 
     // Update is called once per frame
@@ -109,6 +117,7 @@ public class heroctr : MonoBehaviour
             }
             return;
         }
+        changeGoldtext();
         if (isinvincible)
         {
             invicibleTimer -= Time.deltaTime;
@@ -187,7 +196,50 @@ public class heroctr : MonoBehaviour
             rigid.MovePosition(trans);
             return;
         }
-        if(!down)
+        if (crawlable)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                ani.SetBool("idle", false);
+                ani.SetBool("crawl", true);
+                iscraw = true;
+                crawdir = 1;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                if (!down)
+                {
+                    ani.SetBool("idle", false);
+                    ani.SetBool("crawl", true);
+                    iscraw = true;
+                    crawdir = -1;
+                }
+            }
+            else { iscraw = false; }
+        }
+        if (!crawlable)
+        {
+            ani.SetBool("crawl", false);
+            iscraw = false;
+        }
+        if (iscraw)
+        {
+            Vector2 trans = new Vector2(this.transform.position.x, this.transform.position.y +crawdir* 0.1f);
+            if (Input.GetKey(KeyCode.A))
+            {
+                trans.x -= 0.1f;
+                dir = 0;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                trans.x += 0.1f;
+                dir = 1;
+            }
+            rigid.MovePosition(trans);
+            return;
+        }
+        
+        if (!down)
         {
             Vector2 trans = this.transform.position;
             trans.y -= 0.1f;
@@ -250,7 +302,7 @@ public class heroctr : MonoBehaviour
             jumptimer = 0;
             isjump = true;
             down = false;
-        }
+        } 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -299,6 +351,22 @@ public class heroctr : MonoBehaviour
             down = false;
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        GameObject col = collision.gameObject;
+        if (col.transform.tag.Equals("craw"))
+        {
+            crawlable = false;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject col = collision.gameObject;
+        if (col.transform.tag.Equals("craw"))
+        {
+            crawlable = true;
+        }
+    }
     public void healthChange(int amount)
     {
         if (currentHealth == 0)
@@ -323,4 +391,21 @@ public class heroctr : MonoBehaviour
     {
           bloodimg.fillAmount = Mathf.Lerp(bloodimg.fillAmount, ratio, Time.deltaTime * 5);
     }
+    public bool goldChange(int mount)
+    {
+        this.goldnum += mount;
+        if (this.goldnum < 0)
+        {
+            this.goldnum -= mount;
+            return false;//钱不足购买失败
+        }
+        return true;
+    }
+    private void changeGoldtext()
+    {
+        string s = "";
+        s += goldnum;
+        goldnumtext.text = s;
+    }
+
 }

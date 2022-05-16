@@ -52,6 +52,7 @@ public class hammerskectr : MonoBehaviour
 
     private float ratio;
 
+    public GameObject Gold;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -99,8 +100,15 @@ public class hammerskectr : MonoBehaviour
             if (deadtime > maxdeadtime)
             {
                 ani.SetBool("isdead", true);
-                if (deadtime > 2 * maxdeadtime)
+                if (deadtime > 2 * maxdeadtime)//准备开始爆出金币与物品
+                {
+                    var gold = Instantiate(Gold);
+                    goldctr gctr = gold.GetComponent<goldctr>();
+                    gctr.setnum(3);
+                    gold.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-0.5f, this.transform.position.z);
                     GameObject.Destroy(this.gameObject);//摧毁这个游戏对象
+                }
+                    
             }
         }
         ani.SetBool("movex", walkdir);

@@ -52,6 +52,7 @@ public class skeletonctr : MonoBehaviour
 
     private float ratio;
 
+    public GameObject Gold;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -99,7 +100,13 @@ public class skeletonctr : MonoBehaviour
             {
                 ani.SetBool("isdead", true);
                 if(deadtime>2*maxdeadtime)
-                GameObject.Destroy(this.gameObject);//摧毁这个游戏对象
+                {
+                    var gold = Instantiate(Gold);
+                    goldctr gctr = gold.GetComponent<goldctr>();
+                    gctr.setnum(2);
+                    gold.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.4f, this.transform.position.z);
+                    GameObject.Destroy(this.gameObject);//摧毁这个游戏对象
+                }
             }
         }    
         ani.SetBool("movex", walkdir);

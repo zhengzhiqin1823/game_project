@@ -241,6 +241,7 @@ MonoBehaviour:
   deadtime: 0
   maxdeadtime: 0
   bloodimg: {fileID: 4569888333565973588}
+  Gold: {fileID: 1764018836575864098, guid: 4501ab0a5169ee243a26460af827b855, type: 3}
 --- !u!1 &9032555552827350348
 GameObject:
   m_ObjectHideFlags: 0
