@@ -21,9 +21,26 @@ public class bloodbottlectr : MonoBehaviour
         if (g.transform.tag.Equals("hero"))
         {
             heroctr ctr = g.GetComponent<heroctr>();
-            ctr.healthChange(50);
-            GameObject.Destroy(this.gameObject);
+            if(ctr.currentHealth<ctr.maxHealth)
+            {
+                ctr.healthChange(50);
+                GameObject.Destroy(this.gameObject);
+            }
+           
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        GameObject g = collision.gameObject;
+        if (g.transform.tag.Equals("hero"))
+        {
+            heroctr ctr = g.GetComponent<heroctr>();
+            if (ctr.currentHealth < ctr.maxHealth)
+            {
+                ctr.healthChange(50);
+                GameObject.Destroy(this.gameObject);
+            }
 
+        }
+    }
 }
