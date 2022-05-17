@@ -42,7 +42,7 @@ public class skeletonctr : MonoBehaviour
 
     public int maxdeadtime;
 
-    private float invincibleTime = 0.5f;//无敌时间
+    private float invincibleTime = 0.25f;//无敌时间
 
     private bool isinvincible;
 
@@ -112,7 +112,10 @@ public class skeletonctr : MonoBehaviour
         ani.SetBool("movex", walkdir);
         if(Mathf.Abs(hero.transform.position.x-this.transform.position.x+hero.transform.position.y-this.transform.position.y)<3)//满足条件，发现hero
         {
+            if(Mathf.Abs(hero.transform.position.y - this.transform.position.y) < 0.5)
             isfinded = true;
+            else
+                isfinded = false;
         }
         else
         {
