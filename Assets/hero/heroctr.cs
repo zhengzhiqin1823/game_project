@@ -92,7 +92,7 @@ public class heroctr : MonoBehaviour
         maxdeadtime = 75;
         ratio = 1;
         dir = 0;
-        skillcd = 200;
+        skillcd = 100;
         skilltimer = skillcd;
         isskill = false;
         maxskilltimer = 20;
