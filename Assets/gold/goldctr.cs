@@ -12,7 +12,7 @@ public class goldctr : MonoBehaviour
     private void Awake()
     {
         untakabletimer = 0;
-        maxtaketime = 100;
+        maxtaketime = 60;
     }
     private void Update()
     {
