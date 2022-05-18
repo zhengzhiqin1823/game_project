@@ -54,11 +54,13 @@ public class heroskillctr : MonoBehaviour
         {
             skeletonctr ctr = col.GetComponent<skeletonctr>();
             ctr.healthChange(-20);
+            GameObject.Destroy(this.gameObject);
         }
         if (col.transform.tag.Equals("hammerske"))
         {
             hammerskectr ctr = col.GetComponent<hammerskectr>();
             ctr.healthChange(-20);
+            GameObject.Destroy(this.gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
