@@ -12,7 +12,7 @@ public class goldctr : MonoBehaviour
     private void Awake()
     {
         untakabletimer = 0;
-        maxtaketime = 60;
+        maxtaketime = 30;
     }
     private void Update()
     {
@@ -20,6 +20,17 @@ public class goldctr : MonoBehaviour
     }
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject g = collision.gameObject;
+        if (g.transform.tag.Equals("hero"))
+        {
+            if (untakabletimer < maxtaketime) return;
+            heroctr ctr = g.GetComponent<heroctr>();
+            ctr.goldChange(goldnum);
+            GameObject.Destroy(this.gameObject);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
     {
         GameObject g = collision.gameObject;
         if (g.transform.tag.Equals("hero"))

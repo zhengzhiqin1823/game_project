@@ -42,7 +42,7 @@ public class skeletonctr : MonoBehaviour
 
     public int maxdeadtime;
 
-    private float invincibleTime = 0.25f;//无敌时间
+    private float invincibleTime = 1f;//无敌时间
 
     private bool isinvincible;
 
@@ -75,6 +75,7 @@ public class skeletonctr : MonoBehaviour
         isdead = false;
         deadtime = 0;
         maxdeadtime = 75;
+        invincibleTime = 1f;
         invicibleTimer = invincibleTime;
         ratio = 1;
 

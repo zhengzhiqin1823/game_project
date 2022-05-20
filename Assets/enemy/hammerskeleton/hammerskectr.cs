@@ -16,7 +16,7 @@ public class hammerskectr : MonoBehaviour
 
     public int maxattacktime;
 
-    public int maxHealth = 100;//最大生命值
+    public int maxHealth = 260;//最大生命值
 
     public int currentHealth;//当前生命
 
@@ -42,7 +42,7 @@ public class hammerskectr : MonoBehaviour
 
     public int maxdeadtime;
 
-    private float invincibleTime = 0.25f;//无敌时间
+    private float invincibleTime = 1f;//无敌时间
 
     private bool isinvincible;
 
@@ -76,6 +76,7 @@ public class hammerskectr : MonoBehaviour
         isdead = false;
         deadtime = 0;
         maxdeadtime = 75;
+        invincibleTime = 1f;
         invicibleTimer = invincibleTime;
         ratio = 1;
 
