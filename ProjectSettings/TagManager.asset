@@ -10,6 +10,8 @@ TagManager:
   - envirment
   - craw
   - hammerske
+  - dragon
+  - devil
   layers:
   - Default
   - TransparentFX
