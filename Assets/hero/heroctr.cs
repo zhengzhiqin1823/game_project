@@ -256,7 +256,7 @@ public class heroctr : MonoBehaviour
             rigid.MovePosition(trans);
             return;
         }
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A)&&down)
         {
             ani.SetBool("run", false);
             ani.SetBool("movex", false);
@@ -277,7 +277,7 @@ public class heroctr : MonoBehaviour
         {
             ani.SetBool("run", false);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && down)
         {
             dir = 1;
             ani.SetBool("run", false);
@@ -321,6 +321,11 @@ public class heroctr : MonoBehaviour
             hammerskectr ctr = col.GetComponent<hammerskectr>();
             ctr.healthChange(-20 - power);
         }
+        if (isattack && col.transform.tag.Equals("devil"))
+        {
+            devilctr ctr = col.GetComponent<devilctr>();
+            ctr.healthChange(-20-power);
+        }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -331,16 +336,18 @@ public class heroctr : MonoBehaviour
         }
         if (isattack && col.transform.tag.Equals("monster"))
         {
-            if (col.name.Equals("skeleton") )
-            {
                 skeletonctr ctr = col.GetComponent<skeletonctr>();
                 ctr.healthChange(-20 - power);
-            }
         }
         if (isattack && col.transform.tag.Equals("hammerske"))
         {
             hammerskectr ctr = col.GetComponent<hammerskectr>();
             ctr.healthChange(-20-power);
+        }
+        if (isattack && col.transform.tag.Equals("devil"))
+        {
+            devilctr ctr = col.GetComponent<devilctr>();
+            ctr.healthChange(-20 - power);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -389,7 +396,8 @@ public class heroctr : MonoBehaviour
     }
     private void changeHealthimg()
     {
-          bloodimg.fillAmount = Mathf.Lerp(bloodimg.fillAmount, ratio, Time.deltaTime * 5);
+        ratio = (float)currentHealth / ((float)maxHealth);
+        bloodimg.fillAmount = Mathf.Lerp(bloodimg.fillAmount, ratio, Time.deltaTime * 5);
     }
     public bool goldChange(int mount)
     {

@@ -33,8 +33,10 @@ public class sale_bloodbottlectr : MonoBehaviour
                 if(ctr.goldnum>=this.price)
                 {
                     bloodbottle.GetComponent<BoxCollider2D>().enabled =true;
+                    bloodbottle.GetComponent<bloodbottlectr>().untakabletimer = 100;
                     cans.GetComponent<Canvas>().enabled = false;
                     ctr.goldChange(-1 * price);
+
                 }
             }
         }

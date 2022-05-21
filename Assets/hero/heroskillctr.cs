@@ -70,11 +70,19 @@ public class heroskillctr : MonoBehaviour
         {
             skeletonctr ctr = col.GetComponent<skeletonctr>();
             ctr.healthChange(-20);
+            GameObject.Destroy(this.gameObject);
         }
         if (col.transform.tag.Equals("hammerske"))
         {
             hammerskectr ctr = col.GetComponent<hammerskectr>();
             ctr.healthChange(-20);
+            GameObject.Destroy(this.gameObject);
+        }
+        if(col.transform.tag.Equals("devil"))
+        {
+            devilctr ctr = col.GetComponent<devilctr>();
+            ctr.healthChange(-20);
+            GameObject.Destroy(this.gameObject);
         }
     }
 }

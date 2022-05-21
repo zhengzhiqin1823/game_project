@@ -113,7 +113,7 @@ public class hammerskectr : MonoBehaviour
             }
         }
         ani.SetBool("movex", walkdir);
-        if (Mathf.Abs(hero.transform.position.x - this.transform.position.x + hero.transform.position.y - this.transform.position.y) < 5)//满足条件，发现hero
+        if (Mathf.Abs(hero.transform.position.x - this.transform.position.x + hero.transform.position.y - this.transform.position.y) < 5 && Mathf.Abs(hero.transform.position.y - this.transform.position.y) < 2)//满足条件，发现hero
         {
                 isfinded = true;
 
