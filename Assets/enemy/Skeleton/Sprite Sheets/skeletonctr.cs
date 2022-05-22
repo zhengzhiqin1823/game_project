@@ -53,6 +53,8 @@ public class skeletonctr : MonoBehaviour
     private float ratio;
 
     public GameObject Gold;
+
+    public GameObject bloodbottle;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -104,7 +106,16 @@ public class skeletonctr : MonoBehaviour
                 {
                     var gold = Instantiate(Gold);
                     goldctr gctr = gold.GetComponent<goldctr>();
-                    gctr.setnum(2);
+                    int rand = Random.Range(2, 4);
+                    gctr.setnum(rand);
+                    int rand2 = Random.Range(1, 100);
+                    Debug.Log(rand2);
+                    Debug.Log(this.transform.position);
+                    if (rand2>70)
+                    {
+                        var bloodBottle = Instantiate(bloodbottle);
+                        bloodBottle.transform.position = new Vector3(this.transform.position.x + 0.45f, this.transform.position.y-0.05f , this.transform.position.z);
+                    }
                     gold.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.4f, this.transform.position.z);
                     GameObject.Destroy(this.gameObject);//摧毁这个游戏对象
                 }

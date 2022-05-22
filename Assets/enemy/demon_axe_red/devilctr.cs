@@ -18,7 +18,7 @@ public class devilctr : MonoBehaviour
 
     public int maxattacktime;
 
-    public int maxHealth = 100;//最大生命值
+    public int maxHealth = 150;//最大生命值
 
     public int currentHealth;//当前生命
 
@@ -61,6 +61,8 @@ public class devilctr : MonoBehaviour
     public int standtimer;
 
     public int maxstandtime;
+
+    public GameObject bloodbottle;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -120,8 +122,15 @@ public class devilctr : MonoBehaviour
                     ani.SetBool("isdead", true);
                     var gold = Instantiate(Gold);
                     goldctr gctr = gold.GetComponent<goldctr>();
-                    gctr.setnum(2);
-                    gold.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.4f, this.transform.position.z);
+                    int random = Random.Range(5, 7);
+                    gctr.setnum(random);
+                    gold.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.8f, this.transform.position.z);
+                    int random2 = Random.Range(1, 100);
+                    if(random2>70)
+                    {
+                        var bloodBottle = Instantiate(bloodbottle);
+                        bloodBottle.transform.position = new Vector3(this.transform.position.x, this.transform.position.y , this.transform.position.z);
+                    }
                     GameObject.Destroy(this.gameObject);//摧毁这个游戏对象
                 }    
             }

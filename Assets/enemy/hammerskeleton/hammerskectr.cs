@@ -53,6 +53,8 @@ public class hammerskectr : MonoBehaviour
     private float ratio;
 
     public GameObject Gold;
+
+    public GameObject bloodbottle;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -105,8 +107,15 @@ public class hammerskectr : MonoBehaviour
                 {
                     var gold = Instantiate(Gold);
                     goldctr gctr = gold.GetComponent<goldctr>();
-                    gctr.setnum(3);
-                    gold.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-0.5f, this.transform.position.z);
+                    int rand = Random.Range(3, 6);
+                    gctr.setnum(rand);
+                    int rand2 = Random.Range(1, 100);
+                    if (rand2 > 70)
+                    {
+                        var bloodBottle = Instantiate(bloodbottle);
+                        bloodBottle.transform.position = new Vector3(this.transform.position.x+1.4f, this.transform.position.y , this.transform.position.z);
+                    }
+                    gold.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.4f, this.transform.position.z);
                     GameObject.Destroy(this.gameObject);//摧毁这个游戏对象
                 }
                     

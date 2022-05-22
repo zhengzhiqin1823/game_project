@@ -342,3 +342,6 @@ MonoBehaviour:
   maxdeadtime: 0
   bloodimg: {fileID: 4017315767997121827}
   Gold: {fileID: 1764018836575864098, guid: 4501ab0a5169ee243a26460af827b855, type: 3}
+  standtimer: 0
+  maxstandtime: 0
+  bloodbottle: {fileID: 6667678507863366129, guid: cb697348e818cdb40ad61cf2bd14cb4c, type: 3}
