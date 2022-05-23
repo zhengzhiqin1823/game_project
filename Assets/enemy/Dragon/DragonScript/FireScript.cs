@@ -16,7 +16,7 @@ public class FireScript : MonoBehaviour
 
     private Vector3 direction;
 
-    private Transform t;
+    private static Transform t;
 
     private float speed;
     // Start is called before the first frame update
@@ -27,13 +27,14 @@ public class FireScript : MonoBehaviour
         speed = 7f;
 
         src_pos = transform.position;
-
+        obj = null;
         //transform.GetComponent<Renderer>().enabled = false;//当前物体隐藏
 
 
+        //单例
+        //obj.transform.position = src_pos;//设置初始位置
         obj = GameObject.Instantiate(parent, t);//单例
-        obj.transform.position = src_pos;//设置初始位置
-
+        obj.transform.position = t.position;
     }
 
     // Update is called once per frame
@@ -41,17 +42,24 @@ public class FireScript : MonoBehaviour
     {
         if(control)
         {
-            if(obj==null)
-            obj = GameObject.Instantiate(parent,t);//单例
-            src_pos = transform.position;
-            dest_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
-            direction = (dest_pos - src_pos).normalized;
-            if (src_pos != dest_pos)
-                obj.transform.position += direction * speed * Time.deltaTime;
-            if(obj.transform.position.y<=dest_pos.y)
+
+            if (obj == null)
+            {
+                
+            }
+            else
+            {
+                src_pos = transform.position;
+                dest_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
+                direction = (dest_pos - src_pos).normalized;
+                if (obj.transform.position!= dest_pos)
+                    obj.transform.position += direction * speed * Time.deltaTime;
+            }
+            if (obj.transform.position.y <= dest_pos.y)
             {
                 Destroy(obj);
                 obj = null;
+
             }
         }
     }
