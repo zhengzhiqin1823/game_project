@@ -135,7 +135,7 @@ public class heroctr : MonoBehaviour
                 isskill = false;
                 ani.SetBool("skill", false);
             }
-            if((int)skilltimer==(int)(0.3f*maxskilltimer)&&skill)
+            if((int)skilltimer==(int)(0.7f*maxskilltimer)&&skill)
             {
                 skill = false;
                 var shader = Instantiate(skillshader);
