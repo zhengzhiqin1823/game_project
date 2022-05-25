@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class FireScript : MonoBehaviour
 {
-    public static bool control = false;
-
-    GameObject obj;
-
-    public GameObject parent;
+    public  bool control = false;
 
     public Vector3 dest_pos;
 
@@ -16,51 +12,44 @@ public class FireScript : MonoBehaviour
 
     private Vector3 direction;
 
-    private static Transform t;
-
     private float speed;
+
+    public GameObject fireBallPos;
     // Start is called before the first frame update
     void Start()
     {
-        t = transform;
 
         speed = 7f;
-
-        src_pos = transform.position;
-        obj = null;
-        //transform.GetComponent<Renderer>().enabled = false;//当前物体隐藏
-
-
-        //单例
-        //obj.transform.position = src_pos;//设置初始位置
-        obj = GameObject.Instantiate(parent, t);//单例
-        obj.transform.position = t.position;
     }
-
+    private void Awake()
+    {
+        speed = 7f;
+        
+    }
     // Update is called once per frame
     void Update()
     {
-        if(control)
+        if(fireBallPos!=null)
         {
-
-            if (obj == null)
-            {
-                
-            }
-            else
-            {
-                src_pos = transform.position;
-                dest_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
-                direction = (dest_pos - src_pos).normalized;
-                if (obj.transform.position!= dest_pos)
-                    obj.transform.position += direction * speed * Time.deltaTime;
-            }
-            if (obj.transform.position.y <= dest_pos.y)
-            {
-                Destroy(obj);
-                obj = null;
-
-            }
+            src_pos = fireBallPos.transform.position;
+            dest_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
+            direction = (dest_pos - src_pos).normalized;
+            if (this.transform.position != dest_pos)
+                this.transform.position += direction * speed * Time.deltaTime;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject col = collision.gameObject;
+        if (col.transform.tag.Equals("envirment"))
+        {
+            GameObject.Destroy(this.gameObject);
+        }
+        if(col.transform.tag.Equals("hero"))
+        {
+            heroctr hctr = col.GetComponent<heroctr>();
+            hctr.healthChange(-30);
+            GameObject.Destroy(this.gameObject);
         }
     }
 }

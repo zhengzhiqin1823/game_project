@@ -9,30 +9,34 @@ public class DragonScript : MonoBehaviour
 
     public static bool attackMode;
 
-    public Animator animator;
+    private Animator animator;
 
+    public GameObject fireBallpos;
+
+    public GameObject fireBall;
+
+    public float firetimer;
+
+    public float maxfiretime;
     void Start()
     {
         attackMode = false;
         animator = GetComponent<Animator>();
+        maxfiretime = 450;
     }
 
     void Update()
     {
+        firetimer++;
         random = Random.Range(1, 10000);
         //¹¥»÷¸ÅÂÊ%1
-        if (random % 100 == 1)
+        if (random % 100 == 1&&firetimer>maxfiretime)
         {
             attackMode = true;
             animator.SetBool("Attack", attackMode);
-
-
+            firetimer = 0;
             StartCoroutine("DelayFunc1");
-
         }
-
-
-
     }
     IEnumerator DelayFunc1()
     {
@@ -42,7 +46,11 @@ public class DragonScript : MonoBehaviour
             yield return new WaitForSeconds(1.17f);
             timer++;
         }
-        FireScript.control = true;
+        var fireball = Instantiate(fireBall);
+        fireball.transform.position = fireBallpos.transform.position;
+        FireScript fsct = fireball.GetComponent<FireScript>();
+        fsct.control = true;
+        fsct.fireBallPos = fireBallpos;
         attackMode = false;
         animator.SetBool("Attack", attackMode);
     }

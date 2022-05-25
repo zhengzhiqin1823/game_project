@@ -109,9 +109,7 @@ public class skeletonctr : MonoBehaviour
                     int rand = Random.Range(2, 4);
                     gctr.setnum(rand);
                     int rand2 = Random.Range(1, 100);
-                    Debug.Log(rand2);
-                    Debug.Log(this.transform.position);
-                    if (rand2>70)
+                    if (rand2>75)
                     {
                         var bloodBottle = Instantiate(bloodbottle);
                         bloodBottle.transform.position = new Vector3(this.transform.position.x + 0.45f, this.transform.position.y-0.05f , this.transform.position.z);

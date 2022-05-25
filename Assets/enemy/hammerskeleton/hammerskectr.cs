@@ -110,7 +110,7 @@ public class hammerskectr : MonoBehaviour
                     int rand = Random.Range(3, 6);
                     gctr.setnum(rand);
                     int rand2 = Random.Range(1, 100);
-                    if (rand2 > 70)
+                    if (rand2 > 75)
                     {
                         var bloodBottle = Instantiate(bloodbottle);
                         bloodBottle.transform.position = new Vector3(this.transform.position.x+1.4f, this.transform.position.y , this.transform.position.z);
