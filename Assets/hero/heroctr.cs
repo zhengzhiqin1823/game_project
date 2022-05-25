@@ -71,6 +71,8 @@ public class heroctr : MonoBehaviour
     public bool iscraw;
 
     public int crawdir;//1向上，-1向下
+
+    public Canvas deadcanvas;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -112,7 +114,8 @@ public class heroctr : MonoBehaviour
                 ani.SetBool("isdead", true);
                 if (deadtime > 2 * maxdeadtime)
                 {
-                    ;//加载失败动画
+                    deadcanvas.GetComponent<Canvas>().enabled = true;
+                    ;//返回主菜单
                 }  
             }
             return;
