@@ -73,6 +73,8 @@ public class heroctr : MonoBehaviour
     public int crawdir;//1向上，-1向下
 
     public Canvas deadcanvas;
+
+    public Canvas helpcanvas;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -105,6 +107,14 @@ public class heroctr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKey(KeyCode.H))
+        {
+            helpcanvas.GetComponent<Canvas>().enabled = true;
+        }
+        else
+        {
+            helpcanvas.GetComponent<Canvas>().enabled = false;
+        }
         changeHealthimg();
         if (isdead)
         {
