@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class DragonScript : MonoBehaviour
 {
@@ -18,11 +18,19 @@ public class DragonScript : MonoBehaviour
     public float firetimer;
 
     public float maxfiretime;
+
+    public Slider hp;
+
+    public static int hero_energy;
+
     void Start()
     {
+        hero_energy = 0;
+        hp =GameObject.Find("Slider").GetComponent<Slider>();
+        hp.value = 1f;//ÑªÌõÂú
         attackMode = false;
         animator = GetComponent<Animator>();
-        maxfiretime = 450;
+        maxfiretime = 1060;
     }
 
     void Update()
@@ -38,6 +46,7 @@ public class DragonScript : MonoBehaviour
             StartCoroutine("DelayFunc1");
         }
     }
+
     IEnumerator DelayFunc1()
     {
         float timer = 0;
@@ -54,5 +63,14 @@ public class DragonScript : MonoBehaviour
         attackMode = false;
         animator.SetBool("Attack", attackMode);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        this.hp.value -= 0.2f;
+
+    }
+
+
+
 }
 

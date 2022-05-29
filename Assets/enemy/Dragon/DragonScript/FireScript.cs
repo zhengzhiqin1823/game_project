@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireScript : MonoBehaviour
 {
-    public  bool control = false;
+    public bool control = false;
 
     public Vector3 dest_pos;
 
@@ -14,6 +14,7 @@ public class FireScript : MonoBehaviour
 
     private float speed;
 
+    public int add = 0;
     public GameObject fireBallPos;
     // Start is called before the first frame update
     void Start()
@@ -24,23 +25,29 @@ public class FireScript : MonoBehaviour
     private void Awake()
     {
         speed = 7f;
-        
+
     }
     // Update is called once per frame
     void Update()
     {
-        if(fireBallPos!=null)
+        if (fireBallPos != null)
         {
             src_pos = fireBallPos.transform.position;
             dest_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
             direction = (dest_pos - src_pos).normalized;
             if (this.transform.position != dest_pos)
                 this.transform.position += direction * speed * Time.deltaTime;
+            if (this.transform.position.y < GameObject.FindGameObjectWithTag("hero").transform.position.y&&(add++)==0)
+                DragonScript.hero_energy += 1;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject col = collision.gameObject;
+        if(col.transform.position.y< GameObject.FindGameObjectWithTag("hero").transform.position.y)
+        {
+            DragonScript.hero_energy += 1;
+        }
         if (col.transform.tag.Equals("envirment"))
         {
             GameObject.Destroy(this.gameObject);
