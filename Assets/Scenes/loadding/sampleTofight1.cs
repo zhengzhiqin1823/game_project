@@ -10,7 +10,7 @@ public class sampleTofight1 : MonoBehaviour
         GameObject g = collision.gameObject;
         if (g.transform.tag.Equals("hero"))
         {
-            SceneManager.LoadScene("fight1");
+            SceneManager.LoadScene("loadding");
         }
     }
 }

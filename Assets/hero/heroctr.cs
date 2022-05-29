@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 public class heroctr : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class heroctr : MonoBehaviour
 
     private bool down;
 
-    public int maxHealth = 100;//最大生命值
+    public int maxHealth ;//最大生命值
 
     public int currentHealth;//当前生命
 
@@ -82,13 +83,11 @@ public class heroctr : MonoBehaviour
         speed = 10f;
         isjump = false;
         jumptimer = 0;
-        maxjumptimer = 50;
+        maxjumptimer = 80;
         isattack = false;
         maxattacktime = 30;
         attacktime = 0;
         down = false;
-        maxHealth = 100;
-        currentHealth = maxHealth;
         invicibleTimer = invincibleTime;
         power = 0;
         isdead = false;
@@ -102,6 +101,7 @@ public class heroctr : MonoBehaviour
         maxskilltimer = 20;
         skill = false;
         crawlable = false;
+        readinfo();
     }
 
     // Update is called once per frame
@@ -119,6 +119,7 @@ public class heroctr : MonoBehaviour
         if (isdead)
         {
             deadtime++;//先播放死亡动画
+            this.GetComponent<Rigidbody2D>();
             if (deadtime > maxdeadtime)//躺平
             {
                 ani.SetBool("isdead", true);
@@ -339,6 +340,10 @@ public class heroctr : MonoBehaviour
             devilctr ctr = col.GetComponent<devilctr>();
             ctr.healthChange(-20-power);
         }
+        if (col.transform.tag.Equals("scencemanger"))
+        {
+            writeinfo();
+        }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -386,6 +391,10 @@ public class heroctr : MonoBehaviour
         {
             crawlable = true;
         }
+        if(col.transform.tag.Equals("scencemanger"))
+        {
+            writeinfo();
+        }
     }
     public void healthChange(int amount)
     {
@@ -428,5 +437,50 @@ public class heroctr : MonoBehaviour
         s += goldnum;
         goldnumtext.text = s;
     }
+    private void readinfo()
+    {
+        StreamReader str;
+        str = File.OpenText("heroinfo.txt");
+        string s= str.ReadLine();
+        int i = int.Parse(s);
+        maxHealth = i;
+        string s1= str.ReadLine();
+        i = int.Parse(s1);
+        currentHealth = i;
+        string s2 = str.ReadLine();
+        i = int.Parse(s2);
+        goldnum = i;
+        str.Close();
+    }
 
+    private void writeinfo()
+    {
+        StreamWriter stw;
+        stw = File.CreateText("heroinfo.txt");
+        string s = "";
+        s += maxHealth;//maxhealth
+        stw.WriteLine(s);
+        string s1 = "";
+        s1 +=currentHealth;//currenthealth
+        stw.WriteLine(s1);
+        string s2 = "";
+        s2 += goldnum;//goldnum
+        stw.WriteLine(s2);
+        stw.Close();
+
+    }
+    /*
+     *  StreamWriter stw;
+            stw = File.CreateText("heroinfo.txt");
+            string s = "";
+            s += 100;//maxhealth
+            stw.WriteLine(s);
+            string s1 = "";
+            s1 += 100;//currenthealth
+            stw.WriteLine(s1);
+            string s2 = "";
+            s2 += 0;//goldnum
+            stw.WriteLine(s2);
+            stw.Close();
+     */
 }

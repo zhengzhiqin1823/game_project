@@ -12,6 +12,7 @@ TagManager:
   - hammerske
   - dragon
   - devil
+  - scencemanger
   layers:
   - Default
   - TransparentFX
