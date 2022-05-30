@@ -18,7 +18,6 @@ public class Thunder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        go = false;
         src_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
         transform.position = src_pos;
         dest_pos = GameObject.Find("Boss").transform.position;
@@ -27,22 +26,33 @@ public class Thunder : MonoBehaviour
     }
     private void Awake()
     {
+        src_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
+        transform.position = src_pos;
+        dest_pos = GameObject.Find("Boss").transform.position;
         speed = 7f;
-
+        direction = (dest_pos - src_pos).normalized;
+        speed = 7f;
     }
     // Update is called once per frame
     void Update()
     {
-        if(go==true)
+        if (go == true)
+        {
+            Debug.Log(dest_pos);
+            Debug.Log(transform.position);
             if (dest_pos != transform.position)
             {
                 transform.position += direction * speed * Time.deltaTime;
             }
+        }
         
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(this);
-        go = false;
+        GameObject g = collision.gameObject;
+        if (g.transform.tag.Equals("Boss"))
+        {
+            go = false;
+        }
     }
 }
