@@ -871,8 +871,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289765540
-  m_fontColor: {r: 0.64428324, g: 0.6280408, b: 0.6886792, a: 1}
+    rgba: 4282995285
+  m_fontColor: {r: 0.33333334, g: 0.32156864, b: 0.28627452, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -960,15 +960,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3587691305060408296, guid: c3bc7b6dd04c54648a1f325f8c290cb6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.20450793
+      value: 0.17242022
       objectReference: {fileID: 0}
     - target: {fileID: 3587691305060408296, guid: c3bc7b6dd04c54648a1f325f8c290cb6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9788649
+      value: -0.9850235
       objectReference: {fileID: 0}
     - target: {fileID: 3587691305060408296, guid: c3bc7b6dd04c54648a1f325f8c290cb6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -156.399
+      value: -160.143
       objectReference: {fileID: 0}
     - target: {fileID: 3587691305523299497, guid: c3bc7b6dd04c54648a1f325f8c290cb6, type: 3}
       propertyPath: m_LocalPosition.x

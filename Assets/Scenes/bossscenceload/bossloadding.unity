@@ -1605,5 +1605,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrior_Sheet-Effect_0
       objectReference: {fileID: 0}
+    - target: {fileID: 8632573827185505078, guid: c59abc23f3a82ca44a80c96b9f8ce6a6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c59abc23f3a82ca44a80c96b9f8ce6a6, type: 3}
