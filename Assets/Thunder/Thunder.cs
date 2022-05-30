@@ -36,10 +36,11 @@ public class Thunder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (go == true)
         {
-            Debug.Log(dest_pos);
-            Debug.Log(transform.position);
+            //Debug.Log(dest_pos);
+            //Debug.Log(transform.position);
             if (dest_pos != transform.position)
             {
                 transform.position += direction * speed * Time.deltaTime;
@@ -49,10 +50,29 @@ public class Thunder : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("22222");
         GameObject g = collision.gameObject;
-        if (g.transform.tag.Equals("Boss"))
+        if (collision.transform.tag.Equals("dragon"))
         {
+            Debug.Log("111111111111111111111");
+            DragonScript.fall = true;
+            DragonScript.healthChange();
             go = false;
+            GameObject.Destroy(this.gameObject);
+        }
+
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("33333");
+        GameObject g = collision.gameObject;
+        if (g.transform.tag.Equals("dragon"))
+        {
+            Debug.Log("111111111111111111111");
+            DragonScript.fall = true;
+            DragonScript.healthChange();
+            go = false;
+            Destroy(this.gameObject);
         }
     }
 }

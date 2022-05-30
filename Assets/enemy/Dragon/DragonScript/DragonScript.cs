@@ -19,12 +19,21 @@ public class DragonScript : MonoBehaviour
 
     public float maxfiretime;
 
-    public Slider hp;
+    public static Slider hp;
 
     public static int hero_energy;
 
+    public BoxCollider col;
+
+    public static bool fall;
+
+    public bool StopFall;
+
+    public int StopTime;
+
     void Start()
     {
+        col = GetComponent<BoxCollider>();
         hero_energy = 0;
         hp =GameObject.Find("Slider").GetComponent<Slider>();
         hp.value = 1f;//ÑªÌõÂú
@@ -35,15 +44,33 @@ public class DragonScript : MonoBehaviour
 
     void Update()
     {
-        firetimer++;
-        random = Random.Range(1, 10000);
-        //¹¥»÷¸ÅÂÊ%1
-        if (random % 100 == 1&&firetimer>maxfiretime)
+        fall = animator.GetBool("Fall");
+        if(StopTime==500)
         {
-            attackMode = true;
-            animator.SetBool("Attack", attackMode);
-            firetimer = 0;
-            StartCoroutine("DelayFunc1");
+            StopTime = 0;
+            fall = !fall;
+        }
+        if (!fall)
+        {
+            firetimer++;
+            random = Random.Range(1, 10000);
+            //¹¥»÷¸ÅÂÊ%1
+            if (random % 100 == 1 && firetimer > maxfiretime)
+            {
+                attackMode = true;
+                animator.SetBool("Attack", attackMode);
+                firetimer = 0;
+                StartCoroutine("DelayFunc1");
+            }
+        }
+        else
+        {
+            if(!StopFall)
+            transform.position = new Vector3(transform.position.x, transform.position.y-0.1f, transform.position.z);
+            if(StopFall)
+            {
+                StopTime += 1;
+            }
         }
     }
 
@@ -64,13 +91,14 @@ public class DragonScript : MonoBehaviour
         animator.SetBool("Attack", attackMode);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        this.hp.value -= 0.2f;
-
+        if (collision.gameObject.tag.Equals("environment"))
+            StopFall = true;
     }
-
-
-
+    public static void healthChange()
+    {
+        hp.value -= 0.1f;
+    }
 }
 
