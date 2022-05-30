@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bossScenceBegin : MonoBehaviour
 {
-    public Camera main;
+    public Camera maincamera;
 
     public float distance;
 
@@ -12,22 +12,30 @@ public class bossScenceBegin : MonoBehaviour
 
     public float radio;
 
-    
+    public float dis;
+
+    public GameObject hero;
+
+    public GameObject dragon;
     private void Start()
     {
-        
+        radio = 0.6f;
     }
     void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {  //限制size大小  
-            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, minmum, maximum);
-            //滚轮改变 
-            Camera.main.orthographicSize = Camera.main.orthographicSize - Input.GetAxis("Mouse   ScrollWheel") * ChangeSpeed;
-        }
+        dis = Mathf.Sqrt((hero.transform.position.x - dragon.transform.position.x) * (hero.transform.position.x - dragon.transform.position.x) + (hero.transform.position.y - dragon.transform.position.y) * (hero.transform.position.y - dragon.transform.position.y));
+        distance = radio * dis;
+        CameraSizeChange();
     }
     public void CameraSizeChange()
     {
-
+        if(distance<mindistance)
+        {
+            maincamera.orthographicSize = mindistance;
+        }
+        else
+        {
+            maincamera.orthographicSize = distance;
+        }
     }
 }
