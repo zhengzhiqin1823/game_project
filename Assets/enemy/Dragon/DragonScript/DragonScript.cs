@@ -31,8 +31,10 @@ public class DragonScript : MonoBehaviour
 
     public int StopTime;
 
+    public Vector3 standard_pos;
     void Start()
     {
+        standard_pos = transform.position;
         col = GetComponent<BoxCollider>();
         hero_energy = 0;
         hp =GameObject.Find("Slider").GetComponent<Slider>();
@@ -52,6 +54,8 @@ public class DragonScript : MonoBehaviour
         }
         if (!fall)
         {
+            if (transform.position.y <= standard_pos.y)
+                transform.position=new Vector3(transform.position.x, transform.position.y+0.1f, transform.position.z);
             firetimer++;
             random = Random.Range(1, 10000);
             //¹¥»÷¸ÅÂÊ%1
