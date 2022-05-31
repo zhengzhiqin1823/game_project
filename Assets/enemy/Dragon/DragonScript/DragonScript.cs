@@ -73,9 +73,15 @@ public class DragonScript : MonoBehaviour
 
     void Update()
     {
+        if(currentHealth==0)
+        {
+            animator.SetBool("dead", true);
+            StopTime = -1;
+            return;
+        }
         if (rise)
         {
-            if (rigid.position.y < startPos.y)
+            if (rigid.position.y <= startPos.y)
             {
                 Vector2 trans = new Vector2(this.transform.position.x, this.transform.position.y + 0.1f);
                 rigid.MovePosition(trans);
@@ -118,6 +124,7 @@ public class DragonScript : MonoBehaviour
                 {
                     StopTime = 0;
                     fall = !fall;
+                    down = !down;
                     animator.SetBool("Fall", false);
                     rise = true;
                     StopFall = false;
