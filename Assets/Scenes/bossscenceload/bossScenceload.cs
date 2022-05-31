@@ -36,11 +36,7 @@ public class bossScenceload : MonoBehaviour
         {
             if (this.transform.position.x >= 9)
             {
-                progress.text = "按任意键继续";
-                if (Input.anyKeyDown)
-                {
                     async.allowSceneActivation = true;
-                }
             }
             yield return null;
         }
