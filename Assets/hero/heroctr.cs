@@ -340,6 +340,11 @@ public class heroctr : MonoBehaviour
             devilctr ctr = col.GetComponent<devilctr>();
             ctr.healthChange(-20-power);
         }
+        if (isattack && col.transform.tag.Equals("dragon"))
+        {
+            DragonScript ctr = col.GetComponent<DragonScript>();
+            ctr.healthChange(-20 - power);
+        }
         if (col.transform.tag.Equals("scencemanger"))
         {
             writeinfo();
@@ -365,6 +370,11 @@ public class heroctr : MonoBehaviour
         if (isattack && col.transform.tag.Equals("devil"))
         {
             devilctr ctr = col.GetComponent<devilctr>();
+            ctr.healthChange(-20 - power);
+        }
+        if (isattack && col.transform.tag.Equals("dragon"))
+        {
+            DragonScript ctr = col.GetComponent<DragonScript>();
             ctr.healthChange(-20 - power);
         }
     }

@@ -53,14 +53,25 @@ public class Thunder : MonoBehaviour
         GameObject g = collision.gameObject;
         if (collision.transform.tag.Equals("dragon"))
         {
-            
-            DragonScript.fall = true;
-            DragonScript.healthChange();
+            DragonScript ds = g.GetComponent<DragonScript>();
+            ds.fall = true;
+//            DragonScript.healthChange();
             go = false;
             GameObject.Destroy(this.gameObject);
         }
 
     }
-    
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject g = collision.gameObject;
+        if (collision.transform.tag.Equals("dragon"))
+        {
+            DragonScript ds = g.GetComponent<DragonScript>();
+            ds.fall = true;
+            //            DragonScript.healthChange();
+            go = false;
+            GameObject.Destroy(this.gameObject);
+        }
+    }
+
 }
