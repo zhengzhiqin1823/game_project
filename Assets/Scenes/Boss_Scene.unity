@@ -3210,7 +3210,7 @@ GameObject:
   - component: {fileID: 407299583}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: envirment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4410,11 +4410,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1169299802033757794, guid: 59b3f202710c4f841bc4d43ae1e0d88e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.94
+      value: 2.04
       objectReference: {fileID: 0}
     - target: {fileID: -1169299802033757794, guid: 59b3f202710c4f841bc4d43ae1e0d88e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.05
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 899107989, guid: 59b3f202710c4f841bc4d43ae1e0d88e, type: 3}
       propertyPath: healthimg
@@ -4434,11 +4434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1971105143795054976, guid: 59b3f202710c4f841bc4d43ae1e0d88e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8
+      value: 0.46
       objectReference: {fileID: 0}
     - target: {fileID: 1971105143795054976, guid: 59b3f202710c4f841bc4d43ae1e0d88e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.7
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 1971105143795054976, guid: 59b3f202710c4f841bc4d43ae1e0d88e, type: 3}
       propertyPath: m_LocalPosition.z

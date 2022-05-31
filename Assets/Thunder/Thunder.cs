@@ -21,7 +21,7 @@ public class Thunder : MonoBehaviour
         src_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
         transform.position = src_pos;
         dest_pos = GameObject.Find("Boss").transform.position;
-        speed = 7f;
+        speed = 12f;
         direction = (dest_pos - src_pos).normalized;
     }
     private void Awake()
@@ -29,9 +29,9 @@ public class Thunder : MonoBehaviour
         src_pos = GameObject.FindGameObjectWithTag("hero").transform.position;
         transform.position = src_pos;
         dest_pos = GameObject.Find("Boss").transform.position;
-        speed = 7f;
+        speed = 12f;
         direction = (dest_pos - src_pos).normalized;
-        speed = 7f;
+        speed = 12f;
     }
     // Update is called once per frame
     void Update()

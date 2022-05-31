@@ -48,8 +48,13 @@ public class DragonScript : MonoBehaviour
     public bool down;
 
     private Rigidbody2D rigid;//利用刚体运动
+
+    Vector2 startPos;
+
+    public bool rise;
     void Start()
     {
+        startPos = transform.position;
         col = GetComponent<BoxCollider2D>();
         hero_energy = 0;
         attackMode = false;
@@ -68,8 +73,15 @@ public class DragonScript : MonoBehaviour
 
     void Update()
     {
-        animator.SetBool("Fall", down);
-        Debug.Log(fall);
+        if (rise)
+        {
+            if (rigid.position.y < startPos.y)
+            {
+                Vector2 trans = new Vector2(this.transform.position.x, this.transform.position.y + 0.1f);
+                rigid.MovePosition(trans);
+            }
+            else rise = false;
+        }
         changeHealthimg();
         if (isinvincible)
         {
@@ -79,12 +91,7 @@ public class DragonScript : MonoBehaviour
                 isinvincible = false;
             }
         }
-        if(StopTime>=500)
-        {
-            StopTime = 0;
-            fall = !fall;
-            StopFall = false;
-        }
+        
         if (!fall)
         {
             firetimer++;
@@ -107,8 +114,18 @@ public class DragonScript : MonoBehaviour
             }
             if(down)
             {
-                Debug.Log(StopTime);
+                if (StopTime >= 500)
+                {
+                    StopTime = 0;
+                    fall = !fall;
+                    animator.SetBool("Fall", false);
+                    rise = true;
+                    StopFall = false;
+                }
+                
+                else 
                 StopTime += 1;
+                Debug.Log(StopTime);
             }
         }
     }
@@ -132,9 +149,13 @@ public class DragonScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("environment"))
+        Debug.Log("hello");
+        
+        if (collision.gameObject.tag.Equals("envirment"))
         {
             down = true;
+            animator.SetBool("Fall", true);
+            
         }
            
     }
@@ -143,6 +164,7 @@ public class DragonScript : MonoBehaviour
         if (collision.gameObject.tag.Equals("environment"))
         {
             down = false;
+            
         }
     }
     public void healthChange(int amount)
