@@ -50,11 +50,10 @@ public class Thunder : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("22222");
         GameObject g = collision.gameObject;
         if (collision.transform.tag.Equals("dragon"))
         {
-            Debug.Log("111111111111111111111");
+            
             DragonScript.fall = true;
             DragonScript.healthChange();
             go = false;
@@ -62,17 +61,6 @@ public class Thunder : MonoBehaviour
         }
 
     }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        Debug.Log("33333");
-        GameObject g = collision.gameObject;
-        if (g.transform.tag.Equals("dragon"))
-        {
-            Debug.Log("111111111111111111111");
-            DragonScript.fall = true;
-            DragonScript.healthChange();
-            go = false;
-            Destroy(this.gameObject);
-        }
-    }
+    
+    
 }

@@ -23,7 +23,7 @@ public class DragonScript : MonoBehaviour
 
     public static int hero_energy;
 
-    public BoxCollider col;
+    public BoxCollider2D col;
 
     public static bool fall;
 
@@ -31,15 +31,17 @@ public class DragonScript : MonoBehaviour
 
     public int StopTime;
 
+
     void Start()
     {
-        col = GetComponent<BoxCollider>();
+        col = GetComponent<BoxCollider2D>();
         hero_energy = 0;
-        hp =GameObject.Find("Slider").GetComponent<Slider>();
-        hp.value = 1f;//ÑªÌõÂú
+        
+        /*hp.value = 1f;*///ÑªÌõÂú
         attackMode = false;
         animator = GetComponent<Animator>();
         maxfiretime = 1060;
+        fall = false;
     }
 
     void Update()
@@ -93,12 +95,15 @@ public class DragonScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Enter col");
         if (collision.gameObject.tag.Equals("environment"))
             StopFall = true;
     }
+    
     public static void healthChange()
     {
         hp.value -= 0.1f;
     }
+   
 }
 
